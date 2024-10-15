@@ -9,14 +9,17 @@ import UIKit
 import SnapKit
 
 class FloatingLabelTextField: UITextField {
-    
-    private let floatingLabel = UILabel()
-    
+    // Лейбл, который будет "плавать" над текстовым полем
+    private var floatingLabel = UILabel()
+    // Высота лейбла и длительность анимации
     private let floatingLabelHeight: CGFloat = 15
     private let animationDuration: TimeInterval = 0.3
     
+    private var originalPlaceholder: String?
+    // Переопределяем свойство placeholder, чтобы установить его значение в floatingLabel
     override var placeholder: String? {
         didSet {
+            originalPlaceholder = placeholder
             floatingLabel.text = placeholder
         }
     }
@@ -49,29 +52,33 @@ class FloatingLabelTextField: UITextField {
     
     // текстовое поле активируется при рекактировании
     @objc private func textFieldDidBeginEditing() {
-        if text?.isEmpty == true {
-            // Показать лейбл при начале редактирования
-            UIView.animate(withDuration: animationDuration) {
-                self.floatingLabel.alpha = 1
-                self.floatingLabel.textColor = .darkGray
-                self.floatingLabel.snp.updateConstraints { make in
-                    make.bottom.equalTo(self.snp.top).offset(-5)
-                }
-                self.layoutIfNeeded()
+        guard let text = text, text.isEmpty else { return }
+        // Показать лейбл при начале редактирования
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.floatingLabel.alpha = 1
+            self.floatingLabel.textColor = .darkGray
+            self.floatingLabel.snp.updateConstraints { make in
+                make.bottom.equalTo(self.snp.top).offset(-5)
             }
-        }
+            self.layoutIfNeeded()
+        })
+        // Устанавливаем пустой атрибутированный плейсхолдер
+        self.attributedPlaceholder = NSAttributedString(string: "")
     }
     
     // текстовое поле деактивируется после ред.
     @objc private func textFieldDidBeginEnd() {
-        if text?.isEmpty == true {
-            UIView.animate(withDuration: animationDuration) {
-                self.floatingLabel.alpha = 0
-                self.floatingLabel.snp.updateConstraints { make in
-                    make.bottom.equalTo(self.snp.top).offset(self.frame.height) // Возвращаем лейбл на место
-                }
-                self.layoutIfNeeded()
+        guard let text = text, text.isEmpty else { return }
+        
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.floatingLabel.alpha = 0
+            self.floatingLabel.snp.updateConstraints { make in
+                make.bottom.equalTo(self.snp.top).offset(self.frame.height) // Возвращаем лейбл на место
             }
-        }
+            self.layoutIfNeeded()
+        })
+        // Возвращаем плейсхолдер
+        self.attributedPlaceholder = NSAttributedString(string: originalPlaceholder ?? "")
     }
 }
+

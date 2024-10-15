@@ -24,14 +24,14 @@ class LoginView: UIView {
         return label
     }()
     
-    let userNameField: UITextField = {
+    let userNameField: FloatingLabelTextField = {
         let textField = FloatingLabelTextField()
         textField.placeholder = "Username"
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    let passwordField: UITextField = {
+    let passwordField: FloatingLabelTextField = {
         let passwordField = FloatingLabelTextField()
         passwordField.placeholder = "Password"
         passwordField.isSecureTextEntry = true
