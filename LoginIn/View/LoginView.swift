@@ -8,26 +8,31 @@
 import UIKit
 import SnapKit
 
+/*
+ ставим перключатель на ремембер ми и сохраняем логин, при следующем заходе меняем текст на Welcome, username, \nplease enter password
+ */
+
 class LoginView: UIView {
     
     let label: UILabel = {
         let label = UILabel()
-        label.text = "LogIN"
-        label.font = UIFont.systemFont(ofSize: 26, weight: .bold)
-        label.textAlignment = .center
+        label.text = "Welcome,\nplease login"
+        label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        label.textAlignment = .left
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let userNameField: UITextField = {
-        let textField = UITextField()
+        let textField = FloatingLabelTextField()
         textField.placeholder = "Username"
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
     let passwordField: UITextField = {
-        let passwordField = UITextField()
+        let passwordField = FloatingLabelTextField()
         passwordField.placeholder = "Password"
         passwordField.isSecureTextEntry = true
         passwordField.translatesAutoresizingMaskIntoConstraints = false
@@ -37,8 +42,9 @@ class LoginView: UIView {
     let loginButton: UIButton = {
         let loginButton = UIButton()
         loginButton.setTitle("Login", for: .normal)
-        loginButton.backgroundColor = .systemBlue
+        loginButton.backgroundColor = .black
         loginButton.setTitleColor(.white, for: .normal)
+        loginButton.layer.cornerRadius = 20
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         return loginButton
     }()
@@ -52,6 +58,7 @@ class LoginView: UIView {
     
     let switchButton: UISwitch = {
         let switchButton = UISwitch()
+        switchButton.onTintColor = .black
         switchButton.translatesAutoresizingMaskIntoConstraints = false
         return switchButton
     }()
@@ -59,7 +66,7 @@ class LoginView: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = 30
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -82,14 +89,19 @@ class LoginView: UIView {
     }
     
     private func setupUI() {
+        addSubview(label)
         addSubview(stackView)
-        stackView.addArrangedSubview(label)
         stackView.addArrangedSubview(userNameField)
         stackView.addArrangedSubview(passwordField)
         stackView.addArrangedSubview(loginButton)
         stackView.addArrangedSubview(stackViewSwitch)
         stackViewSwitch.addArrangedSubview(labelSwith)
         stackViewSwitch.addArrangedSubview(switchButton)
+        
+        label.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(150)
+            make.leading.equalToSuperview().inset(20)
+        }
         
         stackView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(300)
