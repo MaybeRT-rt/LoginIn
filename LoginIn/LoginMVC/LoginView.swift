@@ -10,8 +10,8 @@ import SnapKit
 
 /*
  ставим перключатель на ремембер ми и сохраняем логин, при следующем заходе меняем текст на Welcome, username, \nplease enter password
+ сделать так что бы поднималось все вверх, при открытие клавиатуры(посмотреть в проекте от нетологии там где есть логин!
  */
-
 class LoginView: UIView {
     
     let label: UILabel = {
@@ -41,12 +41,22 @@ class LoginView: UIView {
     
     let loginButton: UIButton = {
         let loginButton = UIButton()
-        loginButton.setTitle("Login", for: .normal)
+        loginButton.setTitle("Let's go", for: .normal)
         loginButton.backgroundColor = .black
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.layer.cornerRadius = 20
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         return loginButton
+    }()
+    
+    let registerButton: UIButton = {
+        let registerButton = UIButton()
+        registerButton.setTitle("Register", for: .normal)
+        registerButton.backgroundColor = .black.withAlphaComponent(0.7)
+        registerButton.setTitleColor(.white, for: .normal)
+        registerButton.layer.cornerRadius = 20
+        registerButton.translatesAutoresizingMaskIntoConstraints = false
+        return registerButton
     }()
     
     let labelSwith: UILabel = {
@@ -67,6 +77,14 @@ class LoginView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 30
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let registerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -93,7 +111,9 @@ class LoginView: UIView {
         addSubview(stackView)
         stackView.addArrangedSubview(userNameField)
         stackView.addArrangedSubview(passwordField)
-        stackView.addArrangedSubview(loginButton)
+        stackView.addArrangedSubview(registerStackView)
+        registerStackView.addArrangedSubview(loginButton)
+        registerStackView.addArrangedSubview(registerButton)
         stackView.addArrangedSubview(stackViewSwitch)
         stackViewSwitch.addArrangedSubview(labelSwith)
         stackViewSwitch.addArrangedSubview(switchButton)
@@ -117,6 +137,10 @@ class LoginView: UIView {
         }
         
         loginButton.snp.makeConstraints { make in
+            make.height.equalTo(60)
+        }
+        
+        registerButton.snp.makeConstraints { make in
             make.height.equalTo(60)
         }
     }

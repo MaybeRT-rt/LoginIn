@@ -56,7 +56,7 @@ class FloatingLabelTextField: UITextField {
         // Показать лейбл при начале редактирования
         UIView.animate(withDuration: animationDuration, animations: {
             self.floatingLabel.alpha = 1
-            self.floatingLabel.textColor = .darkGray
+            self.floatingLabel.textColor = .black
             self.floatingLabel.snp.updateConstraints { make in
                 make.bottom.equalTo(self.snp.top).offset(-5)
             }
