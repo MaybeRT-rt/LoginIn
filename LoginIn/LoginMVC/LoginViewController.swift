@@ -8,19 +8,28 @@
 import UIKit
 import SnapKit
 
-
 final class LoginViewController: UIViewController {
-    
+    // MARK: - Public Properties
     weak var coordinator: AppCoordinator?
     
-    let loginView = LoginView()
+    // MARK: - Private Properties
+    private let loginView = LoginView()
     private var loginManager: UserDefaultsLoginManagerProtocol = UserDefaultsLoginManager()
+    private var keyboardManager: KeyboardManager?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         loadDataUser()
+        keyboardManagerSetup()
+        
+        if loginView.userNameField.text?.isEmpty == false {
+            loginView.userNameField.showFloatingLabel()
+        }
     }
+    
+    // MARK: - Private Methods
     // Функция для настройки UI
     func setupUI() {
         view.backgroundColor = .white
@@ -41,21 +50,29 @@ final class LoginViewController: UIViewController {
         }
     }
     
+    private func keyboardManagerSetup() {
+        keyboardManager = KeyboardManager(view: view)
+    }
+    
+    private func displayToastAlert(privateMessage: String) {
+        let toast = ToastView(message: privateMessage)
+        toast.showToast(in: self.view)
+    }
+    
+    // MARK: - Actions
     @objc func loginButtonTapped() {
-        guard let login = loginView.userNameField.text, !login.isEmpty else {
-            print("Login is empty")
+        guard let login = loginView.userNameField.text, !login.isEmpty, let passwordField = loginView.passwordField.text, !passwordField.isEmpty else {
+            displayToastAlert(privateMessage: "Login or password empty")
             return
         }
-//        
-//        let rememberMe = loginView.switchButton.isOn
-//        let user = UserModel(login: login)
-//        loginManager.saveLogin(user, rememberMe: rememberMe)
-//        
-//        print("Login: \(login) saved")
         
         if login == loginView.userNameField.text {
             coordinator?.goToTaskScreen()
         }
+    }
+    
+    @objc func registerButtonTapped() {
+        
     }
 }
 

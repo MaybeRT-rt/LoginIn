@@ -12,13 +12,17 @@ import SnapKit
  ставим перключатель на ремембер ми и сохраняем логин, при следующем заходе меняем текст на Welcome, username, \nplease enter password
  сделать так что бы поднималось все вверх, при открытие клавиатуры(посмотреть в проекте от нетологии там где есть логин!
  */
+
+// MARK: - LoginView
 class LoginView: UIView {
     
+    // MARK: - Visual Components
     let label: UILabel = {
         let label = UILabel()
         label.text = "Welcome,\nplease login"
         label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         label.textAlignment = .left
+        label.textColor = .black
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,6 +66,7 @@ class LoginView: UIView {
     let labelSwith: UILabel = {
         let label = UILabel()
         label.text = "Remember me"
+        label.textColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -76,7 +81,7 @@ class LoginView: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 30
+        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -97,6 +102,8 @@ class LoginView: UIView {
         return stackView
     }()
     
+    
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -106,6 +113,7 @@ class LoginView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Constraints
     private func setupUI() {
         addSubview(label)
         addSubview(stackView)
@@ -144,5 +152,4 @@ class LoginView: UIView {
             make.height.equalTo(60)
         }
     }
-    
 }

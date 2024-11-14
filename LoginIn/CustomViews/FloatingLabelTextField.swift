@@ -21,6 +21,12 @@ class FloatingLabelTextField: UITextField {
         didSet {
             originalPlaceholder = placeholder
             floatingLabel.text = placeholder
+            
+            let attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor.darkGray,
+                .font: self.font ?? UIFont.systemFont(ofSize: 16) 
+            ]
+            self.attributedPlaceholder = NSAttributedString(string: originalPlaceholder ?? "", attributes: attributes)
         }
     }
     
@@ -36,7 +42,7 @@ class FloatingLabelTextField: UITextField {
     private func setup() {
         floatingLabel.alpha = 0
         floatingLabel.font = UIFont.systemFont(ofSize: floatingLabelHeight, weight: .bold).withSize(16)
-        floatingLabel.textColor = .lightGray
+        floatingLabel.textColor = .darkGray
         floatingLabel.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(floatingLabel)
@@ -48,12 +54,11 @@ class FloatingLabelTextField: UITextField {
         // Добавляем действия для событий редактирования
         addTarget(self, action: #selector (textFieldDidBeginEditing), for: .editingDidBegin)
         addTarget(self, action: #selector(textFieldDidBeginEnd), for: .editingDidEnd)
+        
+        
     }
     
-    // текстовое поле активируется при рекактировании
-    @objc private func textFieldDidBeginEditing() {
-        guard let text = text, text.isEmpty else { return }
-        // Показать лейбл при начале редактирования
+    func showFloatingLabel() {
         UIView.animate(withDuration: animationDuration, animations: {
             self.floatingLabel.alpha = 1
             self.floatingLabel.textColor = .black
@@ -62,14 +67,9 @@ class FloatingLabelTextField: UITextField {
             }
             self.layoutIfNeeded()
         })
-        // Устанавливаем пустой атрибутированный плейсхолдер
-        self.attributedPlaceholder = NSAttributedString(string: "")
     }
     
-    // текстовое поле деактивируется после ред.
-    @objc private func textFieldDidBeginEnd() {
-        guard let text = text, text.isEmpty else { return }
-        
+    private func hideFloatingLabel() {
         UIView.animate(withDuration: animationDuration, animations: {
             self.floatingLabel.alpha = 0
             self.floatingLabel.snp.updateConstraints { make in
@@ -77,6 +77,21 @@ class FloatingLabelTextField: UITextField {
             }
             self.layoutIfNeeded()
         })
+    }
+    
+    // текстовое поле активируется при редактировании
+    @objc private func textFieldDidBeginEditing() {
+        guard let text = text, text.isEmpty else { return }
+        // Показать лейбл при начале редактирования
+        showFloatingLabel()
+        // Устанавливаем пустой атрибутированный плейсхолдер
+       self.attributedPlaceholder = NSAttributedString(string: "")
+    }
+    
+    // текстовое поле деактивируется после ред.
+    @objc private func textFieldDidBeginEnd() {
+        guard let text = text, text.isEmpty else { return }
+        hideFloatingLabel()
         // Возвращаем плейсхолдер
         self.attributedPlaceholder = NSAttributedString(string: originalPlaceholder ?? "")
     }

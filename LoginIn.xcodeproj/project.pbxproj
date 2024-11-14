@@ -24,6 +24,8 @@
 		4A021F272CD2668400D9C615 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4A021F262CD2668400D9C615 /* FirebaseCrashlytics */; };
 		4A021F292CD2668400D9C615 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4A021F282CD2668400D9C615 /* FirebaseDatabase */; };
 		4A021F2B2CD2668400D9C615 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4A021F2A2CD2668400D9C615 /* FirebaseFirestore */; };
+		4A021F2D2CD2CBEC00D9C615 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A021F2C2CD2CBDE00D9C615 /* KeyboardManager.swift */; };
+		4A49B91E2CE688700027FBD5 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A49B91D2CE688650027FBD5 /* ToastView.swift */; };
 		4ACD381B2CBBD7AC0054E037 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4ACD381A2CBBD7AC0054E037 /* SnapKit */; };
 		4ACD38642CBEB3E90054E037 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACD38552CBEB3E90054E037 /* AppDelegate.swift */; };
 		4ACD38652CBEB3E90054E037 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACD38562CBEB3E90054E037 /* SceneDelegate.swift */; };
@@ -61,6 +63,8 @@
 		4A021F182CD1901B00D9C615 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		4A021F1B2CD25C0300D9C615 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		4A021F1D2CD2648900D9C615 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A021F2C2CD2CBDE00D9C615 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
+		4A49B91D2CE688650027FBD5 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		4ACD37BC2CB73E030054E037 /* LoginIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ACD37D22CB73E050054E037 /* LoginInTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginInTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ACD37DC2CB73E050054E037 /* LoginInUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginInUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +144,7 @@
 		4A021F122CD18F4C00D9C615 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4A021F2C2CD2CBDE00D9C615 /* KeyboardManager.swift */,
 				4A021F102CD18F4C00D9C615 /* UserDefaultsLoginManager.swift */,
 				4A021F112CD18F4C00D9C615 /* UserDefaultsLoginManagerProtocol.swift */,
 			);
@@ -203,6 +208,7 @@
 		4ACD385B2CBEB3E90054E037 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				4A49B91D2CE688650027FBD5 /* ToastView.swift */,
 				4ACD385A2CBEB3E90054E037 /* FloatingLabelTextField.swift */,
 			);
 			path = CustomViews;
@@ -343,6 +349,7 @@
 			packageReferences = (
 				4ACD38002CBBD42F0054E037 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4A021F1F2CD2668400D9C615 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4A49B9102CE3B7C60027FBD5 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4ACD37BD2CB73E030054E037 /* Products */;
@@ -392,6 +399,7 @@
 				4ACD38642CBEB3E90054E037 /* AppDelegate.swift in Sources */,
 				4ACD38652CBEB3E90054E037 /* SceneDelegate.swift in Sources */,
 				4A021F082CD18F3F00D9C615 /* LoginView.swift in Sources */,
+				4A49B91E2CE688700027FBD5 /* ToastView.swift in Sources */,
 				4A021F092CD18F3F00D9C615 /* LoginViewController.swift in Sources */,
 				4A021F0A2CD18F3F00D9C615 /* UserModel.swift in Sources */,
 				4A021F0E2CD18F4300D9C615 /* TaskView.swift in Sources */,
@@ -400,6 +408,7 @@
 				4ACD38672CBEB3E90054E037 /* FloatingLabelTextField.swift in Sources */,
 				4A021F132CD18F4C00D9C615 /* UserDefaultsLoginManager.swift in Sources */,
 				4A021F1C2CD25C0A00D9C615 /* TaskCell.swift in Sources */,
+				4A021F2D2CD2CBEC00D9C615 /* KeyboardManager.swift in Sources */,
 				4A021F142CD18F4C00D9C615 /* UserDefaultsLoginManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +459,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PUJF8P767;
@@ -466,6 +476,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maybert.LoginIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -477,6 +488,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7PUJF8P767;
@@ -493,6 +505,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maybert.LoginIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -740,6 +753,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 11.4.0;
+			};
+		};
+		4A49B9102CE3B7C60027FBD5 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.1;
 			};
 		};
 		4ACD38002CBBD42F0054E037 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
